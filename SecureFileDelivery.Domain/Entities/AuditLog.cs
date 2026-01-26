@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace SecureFileDelivery.Domain.Entities;
 
 // Tracks all access and operations performed on statements
-// Critical for security and compliance in banking systems
 public class AuditLog
 {
     // Unique identifier for this audit entry
