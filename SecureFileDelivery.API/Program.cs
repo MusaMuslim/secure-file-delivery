@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using SecureFileDelivery.Application.Interfaces;
+using SecureFileDelivery.Application.Services;
 using SecureFileDelivery.Infrastructure.Data;
 using SecureFileDelivery.Infrastructure.Repositories;
+using SecureFileDelivery.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IStatementRepository, StatementRepository>();
 builder.Services.AddScoped<IDownloadLinkRepository, DownloadLinkRepository>();
 builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+
+// Register Services
+builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+builder.Services.AddScoped<IEncryptionService, EncryptionService>();
+builder.Services.AddScoped<IStatementService, StatementService>();
+builder.Services.AddScoped<IDownloadLinkService, DownloadLinkService>();
 
 // Configure CORS (for development)
 builder.Services.AddCors(options =>
