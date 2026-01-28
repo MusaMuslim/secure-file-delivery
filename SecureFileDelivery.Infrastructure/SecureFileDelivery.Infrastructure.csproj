@@ -21,8 +21,4 @@
     <ProjectReference Include="..\SecureFileDelivery.Domain\SecureFileDelivery.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Security\" />
-  </ItemGroup>
-
 </Project>
