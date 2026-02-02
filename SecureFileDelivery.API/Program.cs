@@ -107,11 +107,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Apply migrations automatically on startup (for development)
-using (var scope = app.Services.CreateScope())
+// Apply migrations automatically on startup (skip in test environment)
+if (!app.Environment.EnvironmentName.Equals("Test", StringComparison.OrdinalIgnoreCase))
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dbContext.Database.Migrate();
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        dbContext.Database.Migrate();
+    }
 }
 
 // Configure the HTTP request pipeline
@@ -136,3 +139,5 @@ app.MapGet("/health", () => Results.Ok(new
 }));
 
 app.Run();
+
+public partial class Program { }
